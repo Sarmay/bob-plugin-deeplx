@@ -1,0 +1,48 @@
+{
+    "identifier": "me.sarmay.deeplx.translate",
+    "category": "translate",
+    "version": "1.0.10",
+    "name": "DeepL X",
+    "summary": "Plugin based on OwO-Network/DeepLX",
+    "author": "Sarmay",
+    "appcast": "https://github.com/Sarmay/bob-plugin-deeplx/raw/main/appcast.json",
+    "homepage": "https://github.com/Sarmay/bob-plugin-deeplx",
+    "icon": "icon.png",
+    "minBobVersion": "0.5.0",
+    "options": [
+        {
+            "identifier": "url",
+            "type": "text",
+            "title": "API",
+            "defaultValue": "https://api.deeplx.org/{token}/translate",
+            "desc": "默认使用 Linux.do 的 API 网关：请在 API Key 字段填写你的 Key。也可填本地服务地址如 http://localhost:1188/translate。",
+            "textConfig": {
+                "type": "visible"
+            }
+        },
+        {
+            "identifier": "token",
+            "type": "text",
+            "title": "Token",
+            "desc": "如果你在 Linux.do 使用 API Key 方式鉴权，请填写 Key（会自动注入到 URL）。如果你是本地 self-host 模式且接口使用 Bearer 鉴权，可填写 token。",
+            "defaultValue": ""
+        },
+        {
+            "identifier": "alternatives",
+            "type": "menu",
+            "title": "Alternatives",
+            "desc": "开启此功能后，将显示一个替代结果，默认开启。",
+            "defaultValue": "1",
+            "menuValues": [
+                {
+                    "title": "开启",
+                    "value": "1"
+                },
+                {
+                    "title": "关闭",
+                    "value": "2"
+                }
+            ]
+        }
+    ]
+}

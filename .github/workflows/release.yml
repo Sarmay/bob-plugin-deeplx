@@ -1,0 +1,53 @@
+name: release
+
+on: 
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Version tag without v (for example: 1.0.10)"
+        required: true
+        default: "1.0.10"
+
+jobs:
+  build-and-release:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Resolve release ref
+        id: resolve
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "ref=refs/tags/v${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
+            echo "tag=v${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "ref=${{ github.ref }}" >> "$GITHUB_OUTPUT"
+            echo "tag=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Build plugin
+        run: bash release.sh "${{ steps.resolve.outputs.ref }}"
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ steps.resolve.outputs.tag }}
+          files: |
+            dist/*.bobplugin
+          draft: false
+      - run: rm -rf dist
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        if: always() && github.event_name == 'push'
+        with:
+          branch: main
+          commit_message: new release!
+          file_pattern: appcast.json
+
+      
