@@ -77,6 +77,13 @@
       "sha256": "05ba985e24b66c858421f396d50d74f1fccf673d9e63d7091920e86c8934fd84",
       "url": "https://github.com/Sarmay/bob-plugin-deeplx/releases/download/v1.0.10/bob-plugin-deeplx-1.0.10.bobplugin",
       "minBobVersion": "0.5.0"
+    },
+    {
+      "version": "1.0.10",
+      "desc": "Support Linux.do API key mode",
+      "sha256": "2255077c0ef8dbfcd3cecc544a1f2bdf638ac575e700a9855e01277951d18abe",
+      "url": "https://github.com/Sarmay/bob-plugin-deeplx/releases/download/v1.0.10/bob-plugin-deeplx-1.0.10.bobplugin",
+      "minBobVersion": "0.5.0"
     }
   ]
 }
